@@ -4,8 +4,8 @@
   "private": true,
   "description": "Stripe webhook → Telegram notifications for indie hackers",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
+    "dev": "wrangler pages dev public",
+    "deploy": "wrangler pages deploy",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {

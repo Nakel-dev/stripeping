@@ -1,4 +1,6 @@
-# StripePing — Stripe → Telegram for indie hackers
+# StripePing — Payment alerts in Telegram
+
+Stripe, Paystack, Flutterwave & Bachs → Telegram for indie hackers.
 
 ## Deploy
 
@@ -8,57 +10,72 @@
 npx wrangler login
 ```
 
-### 2. Create KV namespace
+### 2. KV namespace
+
+Already configured in `wrangler.toml`. Create new ones only if starting fresh:
 
 ```bash
 npx wrangler kv namespace create TENANTS
 npx wrangler kv namespace create TENANTS --preview
 ```
 
-Copy the `id` values into `wrangler.toml` under `[[kv_namespaces]]`.
-
-### 3. Set secrets
+### 3. Set secrets (Pages)
 
 ```bash
-npx wrangler secret put STRIPE_SECRET_KEY      # sk_live_ or sk_test_
-npx wrangler secret put STRIPE_WEBHOOK_SECRET  # whsec_ for /webhook/platform (checkout)
+npx wrangler pages secret put BACHS_API_KEY --project-name stripeping
+npx wrangler pages secret put BACHS_WEBHOOK_SECRET --project-name stripeping
 ```
 
-Optional — ping yourself when someone buys:
+Optional sale alerts to your Telegram:
 
 ```bash
-npx wrangler secret put TELEGRAM_BOT_TOKEN
-npx wrangler secret put TELEGRAM_CHAT_ID
+npx wrangler pages secret put TELEGRAM_BOT_TOKEN --project-name stripeping
+npx wrangler pages secret put TELEGRAM_CHAT_ID --project-name stripeping
 ```
 
-### 4. Deploy
+For sandbox testing, use a `sk_sandbox_...` key from [Bachs](https://bachs.io) and optionally:
+
+```bash
+npx wrangler pages secret put BACHS_API_BASE --project-name stripeping
+# value: https://sandbox-api.bachs.io
+```
+
+### 4. Bachs platform webhook
+
+In Bachs Developer Portal → Webhooks, add:
+
+`https://stripeping.pages.dev/webhook/platform/bachs`
+
+Subscribe to: `collection.succeeded`, `collection.failed`
+
+### 5. Deploy
 
 ```bash
 npm run deploy
 ```
 
-Your app lives at `https://stripeping.<subdomain>.workers.dev`
-
-### 5. Platform Stripe webhook (optional)
-
-In Stripe Dashboard, add endpoint:
-
-`https://<your-worker>/webhook/platform`
-
-Events: `checkout.session.completed`
-
-(Success page also provisions tenants if this webhook is missing.)
+Live URL: **https://stripeping.pages.dev**
 
 ---
 
 ## Customer flow
 
-1. Visit `/` → Buy $19
-2. Stripe Checkout → `/success` → `/setup/{key}`
-3. Customer pastes **their** Stripe `whsec_`, Telegram bot token, chat ID
-4. Customer adds **their** webhook URL in Stripe:
+1. Visit `/` → enter email → Buy $19 (~₦30,000 via Bachs)
+2. Bachs checkout (bank transfer, card, mobile money, etc.)
+3. `/success?checkout_id=...` → `/setup/{key}`
+4. Customer selects providers (Stripe / Paystack / Flutterwave / Bachs) + Telegram
+5. Customer adds webhook URLs in each provider dashboard
 
-   `https://<your-worker>/webhook/stripe/{key}`
+---
+
+## Webhook URLs (per customer)
+
+| Provider | URL |
+|----------|-----|
+| Stripe | `POST /webhook/stripe/{key}` |
+| Paystack | `POST /webhook/paystack/{key}` |
+| Flutterwave | `POST /webhook/flutterwave/{key}` |
+| Bachs | `POST /webhook/bachs/{key}` |
 
 ---
 
@@ -66,7 +83,6 @@ Events: `checkout.session.completed`
 
 ```bash
 cp .env.example .dev.vars
-# Fill STRIPE_SECRET_KEY, add kv preview ids in wrangler.toml
 npm run dev
 ```
 
@@ -74,10 +90,10 @@ npm run dev
 
 | Path | Description |
 |------|-------------|
-| `GET /` | Landing + buy button |
-| `POST /checkout` | Start Stripe Checkout |
+| `GET /` | Landing + buy form |
+| `POST /checkout` | Start Bachs checkout |
 | `GET /success` | After payment → setup link |
-| `GET/POST /setup/:key` | Configure tenant |
-| `POST /webhook/stripe/:key` | Customer Stripe events |
-| `POST /webhook/platform` | Your checkout webhook |
+| `GET/POST /setup/:key` | Configure providers + Telegram |
+| `POST /webhook/platform/bachs` | Your Bachs checkout webhook |
+| `POST /webhook/{provider}/:key` | Customer payment events |
 | `GET /health` | JSON health |

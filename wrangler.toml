@@ -1,8 +1,7 @@
 name = "stripeping"
-main = "src/index.ts"
 compatibility_date = "2025-08-19"
 compatibility_flags = ["nodejs_compat"]
-account_id = "0863cfe042bd9a02e0ac3cedf83fb7f8"
+pages_build_output_dir = "public"
 
 [observability]
 enabled = true
