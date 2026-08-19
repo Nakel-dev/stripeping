@@ -2,6 +2,12 @@ name = "stripeping"
 main = "src/index.ts"
 compatibility_date = "2025-08-19"
 compatibility_flags = ["nodejs_compat"]
+account_id = "0863cfe042bd9a02e0ac3cedf83fb7f8"
 
 [observability]
 enabled = true
+
+[[kv_namespaces]]
+binding = "TENANTS"
+id = "110384f83ed1467e8a11d6b1d52c198e"
+preview_id = "789a40dc68f8470d8afa3abf7c861746"
