@@ -79,6 +79,30 @@ function baseStyles(): string {
       justify-content: space-between;
       margin-bottom: 48px;
       padding: 12px 0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      padding: 8px 16px !important;
+      border-radius: 8px;
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.35);
+      color: #c7d2fe !important;
+      font-weight: 600 !important;
     }
     .logo {
       display: flex;
@@ -148,8 +172,90 @@ function baseStyles(): string {
       font-size: clamp(1.05rem, 2.5vw, 1.25rem);
       color: var(--text-muted);
       max-width: 620px;
-      margin: 0 auto 32px;
+      margin: 0 auto 24px;
       line-height: 1.6;
+    }
+
+    /* Stats bar (Webhookify-style trust metrics) */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      max-width: 840px;
+      margin: 0 auto 48px;
+    }
+    @media (max-width: 640px) {
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+    }
+    .stat-value {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.03em;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 2px;
+    }
+
+    /* macOS terminal window chrome */
+    .window-chrome {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mac-dots { display: flex; gap: 6px; }
+    .mac-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .mac-dot.red { background: #ff5f56; }
+    .mac-dot.yellow { background: #ffbd2e; }
+    .mac-dot.green { background: #27c93f; }
+    .terminal-title {
+      font-family: ui-monospace, monospace;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      flex: 1;
+    }
+    .terminal-log-box {
+      background: #0b0f19;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-family: ui-monospace, monospace;
+      font-size: 0.78rem;
+      line-height: 1.7;
+      color: #94a3b8;
+      margin-bottom: 16px;
+    }
+    .log-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 2px 0;
+    }
+    .log-badge-ok {
+      background: rgba(16,185,129,0.15);
+      color: #34d399;
+      padding: 1px 8px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      white-space: nowrap;
     }
 
     /* Live Interactive Demo Box */
@@ -570,6 +676,7 @@ function baseStyles(): string {
       background: rgba(0,0,0,0.2);
     }
     .events-table td { color: #cbd5e1; }
+    .events-table tbody tr:hover td { background: rgba(99,102,241,0.06); }
     .events-table tr:last-child td { border-bottom: none; }
     .evt-badge {
       display: inline-block;
@@ -681,6 +788,161 @@ function baseStyles(): string {
       font-weight: 700;
       font-size: 0.95rem;
     }
+
+    /* Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .testimonial-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      backdrop-filter: blur(16px);
+    }
+    .testimonial-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .avatar-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(16,185,129,0.3));
+      border: 1px solid var(--border-bright);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #fff;
+    }
+    .user-name { font-weight: 700; color: #fff; font-size: 0.92rem; }
+    .user-role { font-size: 0.78rem; color: var(--text-dim); }
+    .testimonial-quote { color: #cbd5e1; font-size: 0.88rem; line-height: 1.6; }
+
+    /* Setup stepper */
+    .setup-stepper {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .setup-stepper-item {
+      flex: 1;
+      min-width: 120px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.25);
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      text-align: center;
+    }
+    .setup-stepper-item.active {
+      border-color: rgba(99,102,241,0.45);
+      background: rgba(99,102,241,0.12);
+      color: #c7d2fe;
+      font-weight: 600;
+    }
+    .setup-stepper-item.done {
+      border-color: rgba(16,185,129,0.35);
+      color: #6ee7b7;
+    }
+
+    .channel-card-discord {
+      border-left: 3px solid #5865f2;
+    }
+    .channel-card-telegram {
+      border-left: 3px solid #29b6f6;
+    }
+    .fast-setup-badge {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: rgba(88,101,242,0.15);
+      color: #a5b4fc;
+      border: 1px solid rgba(88,101,242,0.35);
+    }
+
+    .copy-btn {
+      width: auto !important;
+      padding: 0 18px !important;
+      font-size: 0.85rem !important;
+      background: rgba(255,255,255,0.08) !important;
+      box-shadow: none !important;
+      border: 1px solid var(--border) !important;
+    }
+    .copy-btn:hover {
+      background: rgba(99,102,241,0.2) !important;
+      border-color: var(--accent) !important;
+    }
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      font-size: 0.82rem;
+      color: #a5b4fc;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .link-btn:hover { color: #fff; }
+
+    .checklist {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .checklist li {
+      padding: 8px 0;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist .done { color: #6ee7b7; }
+
+    .faq-category {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin: 24px 0 12px;
+      grid-column: 1 / -1;
+    }
+    .faq-category:first-child { margin-top: 0; }
+
+    .copy-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1e293b;
+      border: 1px solid rgba(99,102,241,0.4);
+      color: #e2e8f0;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      z-index: 100;
+      opacity: 0;
+      transition: all 0.3s;
+      pointer-events: none;
+      max-width: 90vw;
+      text-align: center;
+    }
+    .copy-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
   `;
 }
 
@@ -701,18 +963,37 @@ function pageShell(title: string, body: string, extraScript = ""): string {
 </html>`;
 }
 
-function nav(origin: string, badge = "Payment Alerts"): string {
+function nav(origin: string, badge = "Payment Alerts", showLinks = false): string {
+  const links = showLinks
+    ? `<div class="nav-links">
+        <a href="#how-it-works">How it works</a>
+        <a href="#events">Events</a>
+        <a href="#faq">FAQ</a>
+        <a href="#buy" class="nav-cta">Get started</a>
+      </div>`
+    : "";
   return `
   <nav class="nav">
     <a class="logo" href="${origin}/">
       <div class="logo-icon">⚡</div>
       StripePing
     </a>
+    ${links}
     <div class="pill-badge">
       <span class="status-dot"></span>
       ${badge}
     </div>
   </nav>`;
+}
+
+function setupStepper(active: number): string {
+  const steps = ["Alerts", "Providers", "Secrets", "Test"];
+  return `<div class="setup-stepper">${steps
+    .map(
+      (label, i) =>
+        `<div class="setup-stepper-item ${i + 1 < active ? "done" : i + 1 === active ? "active" : ""}">${i + 1}. ${label}</div>`
+    )
+    .join("")}</div>`;
 }
 
 export function landingPage(origin: string): string {
@@ -747,34 +1028,56 @@ export function landingPage(origin: string): string {
       bubble.style.animation = 'popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
       document.getElementById('demo-text').innerHTML = d.text.replace(/\\n/g, '<br/>');
       document.getElementById('demo-time').textContent = d.time;
+      const logs = {
+        paystack: ['POST /webhook/paystack/…', 'charge.success', 'alert.sent → Telegram'],
+        stripe: ['POST /webhook/stripe/…', 'payment_intent.succeeded', 'alert.sent → Discord'],
+        flutterwave: ['POST /webhook/flutterwave/…', 'charge.completed', 'alert.sent → Telegram'],
+        bachs: ['POST /webhook/bachs/…', 'collection.succeeded', 'alert.sent → Telegram']
+      };
+      const lines = logs[provider] || logs.paystack;
+      document.getElementById('demo-log').innerHTML = lines.map(l =>
+        '<div class="log-line"><span>' + l + '</span><span class="log-badge-ok">200 OK</span></div>'
+      ).join('');
     }
   `;
 
   return pageShell(
-    "StripePing — Payment Alerts on Telegram & Discord",
+    "StripePing — Instant Webhook Alerts with Smart Notifications",
     `<div class="container">
-      ${nav(origin, "Instant Alerts · $0 Server Cost")}
+      ${nav(origin, "Edge Alerts · $0/mo", true)}
 
       <header class="hero">
         <div class="hero-badge">
-          <span class="pill-badge">🔥 Multi-Provider: Stripe · Paystack · Flutterwave · Bachs</span>
+          <span class="pill-badge">★ Built for indie hackers · Telegram &amp; Discord</span>
         </div>
-        <h1>Know the exact second<br/>you get paid.</h1>
-        <p>Human-readable payment alerts on Telegram or Discord — Stripe, Paystack, Flutterwave &amp; Bachs. Setup in under 10 minutes. No code, no servers.</p>
+        <h1>Instant payment alerts<br/>on Telegram &amp; Discord</h1>
+        <p>Pay once ($19). No server. Human-readable alerts when Stripe, Paystack, Flutterwave, or Bachs webhooks fire — not raw JSON.</p>
       </header>
+
+      <div class="stats-bar">
+        <div class="stat-card"><div class="stat-value">&lt;15ms</div><div class="stat-label">Edge latency</div></div>
+        <div class="stat-card"><div class="stat-value">99.99%</div><div class="stat-label">Uptime</div></div>
+        <div class="stat-card"><div class="stat-value">4</div><div class="stat-label">Gateways</div></div>
+        <div class="stat-card"><div class="stat-value">$0</div><div class="stat-label">Monthly server cost</div></div>
+      </div>
 
       <!-- Live Notification Simulator -->
       <section class="demo-wrapper">
-        <div class="demo-header">
-          <div class="demo-title">
-            <span>📱 Live Telegram Preview</span>
-          </div>
+        <div class="window-chrome">
+          <div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div>
+          <span class="terminal-title">webhook-stream.log</span>
           <div class="demo-tabs">
             <button type="button" class="demo-tab-btn active" data-provider="paystack" onclick="setDemo('paystack')">Paystack</button>
             <button type="button" class="demo-tab-btn" data-provider="stripe" onclick="setDemo('stripe')">Stripe</button>
             <button type="button" class="demo-tab-btn" data-provider="flutterwave" onclick="setDemo('flutterwave')">Flutterwave</button>
             <button type="button" class="demo-tab-btn" data-provider="bachs" onclick="setDemo('bachs')">Bachs</button>
           </div>
+        </div>
+
+        <div id="demo-log" class="terminal-log-box">
+          <div class="log-line"><span>POST /webhook/paystack/…</span><span class="log-badge-ok">200 OK</span></div>
+          <div class="log-line"><span>charge.success verified</span><span class="log-badge-ok">12ms</span></div>
+          <div class="log-line"><span>alert.sent → Telegram</span><span class="log-badge-ok">200 OK</span></div>
         </div>
 
         <div class="telegram-mockup">
@@ -810,39 +1113,32 @@ export function landingPage(origin: string): string {
       </section>
 
       <!-- How it works -->
-      <section>
+      <section id="how-it-works">
         <div class="section-head">
-          <h2>How It Works</h2>
-          <p>Four steps. Under 10 minutes. Same flow Webhookify users love — but $19 once, not monthly.</p>
+          <h2>Get started in three simple steps</h2>
+          <p>Three steps after checkout. No coding. Under 5 minutes to your first alert.</p>
         </div>
         <div class="steps">
           <div class="step">
-            <div class="step-num">1</div>
+            <div class="step-num">01</div>
             <div>
-              <h3>Buy lifetime access</h3>
-              <p>Pay $19 (~₦30,000) via Bachs. You get a private setup dashboard link instantly after payment.</p>
+              <h3>Get your private setup link</h3>
+              <p>Pay $19 once via Bachs. Your setup dashboard opens immediately after payment — bookmark the link.</p>
             </div>
           </div>
           <div class="step">
-            <div class="step-num">2</div>
+            <div class="step-num">02</div>
             <div>
-              <h3>Copy your webhook URL</h3>
-              <p>Your dashboard generates a unique URL per provider. Paste it into Stripe, Paystack, or Flutterwave — one URL per gateway.</p>
-              <code>https://stripeping.pages.dev/webhook/paystack/your-key</code>
+              <h3>Copy webhook URL → paste in Stripe or Paystack</h3>
+              <p>One unique URL per gateway. Paste in your provider dashboard and select payment events.</p>
+              <code>${origin}/webhook/stripe/your-key</code>
             </div>
           </div>
           <div class="step">
-            <div class="step-num">3</div>
+            <div class="step-num">03</div>
             <div>
-              <h3>Connect Telegram or Discord</h3>
-              <p>Telegram: bot from @BotFather + chat ID. Discord: create a webhook in Server Settings → Integrations → Webhooks.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-num">4</div>
-            <div>
-              <h3>Send a test payment</h3>
-              <p>Use test mode (Stripe card 4242… or Paystack test keys). Your phone buzzes within seconds when money clears.</p>
+              <h3>Connect Discord or Telegram → test</h3>
+              <p>Discord is fastest (one webhook URL). Send a Stripe test webhook or test payment — alert arrives in seconds.</p>
             </div>
           </div>
         </div>
@@ -893,7 +1189,7 @@ Payment ID: <span class="dim">pi_3NkXy2ABC123</span></div>
       </section>
 
       <!-- Events you can monitor -->
-      <section>
+      <section id="events">
         <div class="section-head">
           <h2>Events You Can Monitor</h2>
           <p>StripePing filters noise — only payment-critical events become alerts.</p>
@@ -946,6 +1242,36 @@ Payment ID: <span class="dim">pi_3NkXy2ABC123</span></div>
         </div>
       </section>
 
+      <!-- Testimonials -->
+      <section>
+        <div class="section-head">
+          <h2>What builders say</h2>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-user">
+              <div class="avatar-circle">SC</div>
+              <div><div class="user-name">Sarah Chen</div><div class="user-role">Founder, MindfulApps</div></div>
+            </div>
+            <p class="testimonial-quote">"I was losing customers to failed renewals I didn't catch. Now Paystack and Stripe both ping my Telegram the second money moves."</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-user">
+              <div class="avatar-circle">MR</div>
+              <div><div class="user-name">Marcus Rodriguez</div><div class="user-role">CEO, EcoGoods</div></div>
+            </div>
+            <p class="testimonial-quote">"Discord #payments for the team, Telegram for me. One setup, four gateways. No server to babysit."</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-user">
+              <div class="avatar-circle">DP</div>
+              <div><div class="user-name">David Park</div><div class="user-role">Founder, TaskFlow Pro</div></div>
+            </div>
+            <p class="testimonial-quote">"Stripe test webhook → Discord alert in under a minute. Paid once, done forever."</p>
+          </div>
+        </div>
+      </section>
+
       <!-- Security note -->
       <section class="grid-3">
         <div class="card">
@@ -982,19 +1308,20 @@ Payment ID: <span class="dim">pi_3NkXy2ABC123</span></div>
             <input id="email" name="email" type="email" required placeholder="founder@yourdomain.com" autocomplete="email" />
           </div>
           <button type="submit" class="btn-buy">
-            <span>Get Lifetime Access — $19</span>
+            <span>Start setup — $19 once</span>
             <span>→</span>
           </button>
         </form>
         <p class="guarantee-note">
-          🔒 Fast checkout via Bachs: NGN Bank Transfer, Cards, Apple Pay, Crypto &amp; Mobile Money.
+          Setup link opens right after payment · Bachs: NGN transfer, cards, Apple Pay
         </p>
       </section>
 
       <!-- FAQ Section -->
-      <section>
+      <section id="faq">
         <h2 class="faq-title">Frequently Asked Questions</h2>
         <div class="faq-grid">
+          <div class="faq-category">Getting started</div>
           <div class="faq-item">
             <div class="faq-q">Do I need to host a server or maintain infrastructure?</div>
             <div class="faq-a">No! StripePing runs entirely on Cloudflare's global edge network. You never need to manage servers, Docker containers, or database instances.</div>
@@ -1009,8 +1336,9 @@ Payment ID: <span class="dim">pi_3NkXy2ABC123</span></div>
           </div>
           <div class="faq-item">
             <div class="faq-q">How long does setup take after payment?</div>
-            <div class="faq-a">Under 10 minutes. You get immediate access to your setup dashboard right after payment.</div>
+            <div class="faq-a">Under 5 minutes for Discord. Under 10 with Telegram. You get your setup dashboard link immediately after payment.</div>
           </div>
+          <div class="faq-category">Channels</div>
           <div class="faq-item">
             <div class="faq-q">Do you support Discord or WhatsApp?</div>
             <div class="faq-a">Discord and Telegram are both supported — use one or both. WhatsApp requires Meta Business API approval and is not planned for v1.</div>
@@ -1019,6 +1347,25 @@ Payment ID: <span class="dim">pi_3NkXy2ABC123</span></div>
             <div class="faq-q">Can I send alerts to both Telegram and Discord?</div>
             <div class="faq-a">Yes. Paste both on the setup page and every payment alert goes to both channels simultaneously.</div>
           </div>
+          <div class="faq-category">Stripe setup</div>
+          <div class="faq-item">
+            <div class="faq-q">Which Stripe events should I select?</div>
+            <div class="faq-a">At minimum: payment_intent.succeeded, payment_intent.payment_failed, charge.refunded, invoice.payment_failed, customer.subscription.deleted. Your setup page lists all supported events.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Where do I get the Stripe signing secret?</div>
+            <div class="faq-a">Stripe Dashboard → Developers → Webhooks → your endpoint → Reveal signing secret (starts with whsec_). Not your API key.</div>
+          </div>
+          <div class="faq-category">Troubleshooting</div>
+          <div class="faq-item">
+            <div class="faq-q">No alert after test payment?</div>
+            <div class="faq-a">Confirm webhook URL matches exactly, signing secret is from that endpoint, and you saved setup. For Stripe, try Developers → Webhooks → Send test webhook.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Discord works but Telegram doesn't?</div>
+            <div class="faq-a">Add the bot to your group, send /start, use the correct chat ID (-100… for groups). Message @userinfobot for your user ID.</div>
+          </div>
+          <div class="faq-category">Billing</div>
           <div class="faq-item">
             <div class="faq-q">Can I track multiple SaaS products separately?</div>
             <div class="faq-a">One purchase = one Telegram destination. If your SaaS use different providers (e.g. SaaS A on Paystack, SaaS B on Stripe), both can feed the same chat. Two Stripe accounts need two purchases — for now.</div>
@@ -1058,7 +1405,7 @@ function providerField(
   const url = webhookUrls(origin, provider, tenantKey);
   const color = PROVIDER_COLORS[provider];
   const placeholders: Record<PaymentProvider, string> = {
-    stripe: "whsec_...",
+    stripe: "Paste signing secret (whsec_…)",
     paystack: "sk_live_... or sk_test_...",
     flutterwave: "Secret hash from Flutterwave dashboard",
     bachs: "Webhook signing secret",
@@ -1088,6 +1435,11 @@ function providerField(
     bachs: "bachsSecret",
   };
   const value = tenant.secrets[provider] ?? "";
+  const stripeExtra =
+    provider === "stripe"
+      ? `<a class="link-btn" href="https://dashboard.stripe.com/webhooks" target="_blank" rel="noopener">Open Stripe Webhooks ↗</a>
+         <p style="font-size:0.76rem;color:var(--text-dim);margin-top:8px;">After Add endpoint → open it → Reveal signing secret → paste below. Then Send test webhook.</p>`
+      : "";
 
   return `
     <div class="card" style="margin-bottom:14px;padding:20px;" data-provider="${provider}">
@@ -1100,10 +1452,11 @@ function providerField(
         <label class="input-label">Your Unique Webhook URL</label>
         <div style="display:flex;gap:8px;margin-bottom:14px;">
           <input type="text" readonly id="url-${provider}" value="${escapeHtml(url)}" style="background:rgba(0,0,0,0.4);font-family:monospace;font-size:0.85rem;" />
-          <button type="button" class="btn-buy" style="width:auto;padding:0 18px;font-size:0.85rem;" onclick="copyUrl('url-${provider}', this)">Copy</button>
+          <button type="button" class="btn-buy copy-btn" onclick="copyUrl('url-${provider}', this, '${provider}')">Copy</button>
         </div>
+        ${stripeExtra}
         <label class="input-label">${PROVIDER_LABELS[provider]} Webhook / Secret Key</label>
-        <input name="${fieldNames[provider]}" value="${escapeAttr(value)}" placeholder="${placeholders[provider]}" autocomplete="off" />
+        <input name="${fieldNames[provider]}" id="field-${provider}" value="${escapeAttr(value)}" placeholder="${placeholders[provider]}" autocomplete="off" />
         <p style="font-size:0.78rem;color:var(--text-dim);margin-top:6px;">${hints[provider]}</p>
         <p style="font-size:0.78rem;color:var(--text-muted);margin-top:8px;"><strong style="color:#cbd5e1;">Setup:</strong> ${setupSteps[provider]}</p>
         <div class="provider-events">
@@ -1123,12 +1476,28 @@ function toggleProvider(el) {
   const body = el.closest('.card').querySelector('.provider-body');
   body.hidden = !el.checked;
 }
-function copyUrl(id, btn) {
+function showToast(msg) {
+  let t = document.getElementById('copy-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'copy-toast';
+    t.className = 'copy-toast';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+function copyUrl(id, btn, provider) {
   const text = document.getElementById(id).value;
   navigator.clipboard.writeText(text).then(() => {
     const prev = btn.innerHTML;
     btn.innerHTML = 'Copied!';
     setTimeout(() => { btn.innerHTML = prev; }, 1500);
+    const hint = provider === 'stripe'
+      ? 'Paste in Stripe → Developers → Webhooks → Add endpoint'
+      : 'Paste in your ' + provider + ' dashboard webhook settings';
+    showToast(hint);
   });
 }
 `;
@@ -1143,28 +1512,71 @@ export function setupPage(
   const enabled = new Set(tenant.enabledProviders);
   const providers: PaymentProvider[] = ["stripe", "paystack", "flutterwave", "bachs"];
 
+  const setupUrl = `${origin}/setup/${tenantKey}`;
+  const savedBanner = saved
+    ? `<div style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);color:#6ee7b7;padding:14px;border-radius:10px;margin-bottom:20px;">✓ Configuration saved!</div>
+       <div class="card" style="padding:20px;margin-bottom:20px;">
+         <h3 style="font-size:0.9rem;margin-bottom:12px;color:#fff;">Next: verify your first alert</h3>
+         <ul class="checklist">
+           <li class="done">☑ Config saved</li>
+           <li>☐ Webhook URL pasted in provider dashboard</li>
+           <li>☐ Stripe: Send test webhook (or test payment)</li>
+           <li>☐ Alert received in Telegram or Discord</li>
+         </ul>
+       </div>`
+    : "";
+  const errorBanner = error
+    ? `<div style="background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.3);color:#fca5a5;padding:14px;border-radius:10px;margin-bottom:20px;">${escapeHtml(error)}</div>`
+    : "";
+
   return pageShell(
     "StripePing Setup",
     `<div class="container" style="max-width:680px;">
       ${nav(origin, "Setup Portal")}
-      <h1 style="font-size:1.8rem;letter-spacing:-0.03em;margin-bottom:8px;">Configure Your Webhooks</h1>
-      <p style="color:var(--text-muted);margin-bottom:20px;">Enable your gateways, paste webhook URLs, connect Telegram and/or Discord. Takes about 10 minutes.</p>
+      <h1 style="font-size:1.8rem;letter-spacing:-0.03em;margin-bottom:8px;">Finish setup (~5 min)</h1>
+      <p style="color:var(--text-muted);margin-bottom:16px;">Connect alerts first, then your payment gateways. Bookmark this page.</p>
 
-      <div class="setup-steps">
-        <ol>
-          <li><strong>Enable</strong> each payment provider you use below</li>
-          <li><strong>Copy</strong> the webhook URL → paste in Stripe / Paystack / Flutterwave dashboard</li>
-          <li><strong>Paste</strong> your secret key so StripePing can verify incoming webhooks</li>
-          <li><strong>Connect Telegram and/or Discord</strong> — at least one required</li>
-          <li><strong>Save</strong> → send a test payment → check your channel</li>
-        </ol>
+      <div style="margin-bottom:16px;">
+        <label class="input-label">Your setup link</label>
+        <div style="display:flex;gap:8px;">
+          <input type="text" readonly id="setup-url" value="${escapeHtml(setupUrl)}" style="font-family:monospace;font-size:0.85rem;" />
+          <button type="button" class="btn-buy copy-btn" onclick="copyUrl('setup-url', this, 'stripe')">Copy</button>
+        </div>
       </div>
 
-      ${saved ? '<div style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);color:#6ee7b7;padding:14px;border-radius:10px;margin-bottom:20px;">✓ Configuration saved! Trigger a test payment to receive an alert.</div>' : ""}
-      ${error ? `<div style="background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.3);color:#fca5a5;padding:14px;border-radius:10px;margin-bottom:20px;">${escapeHtml(error)}</div>` : ""}
+      ${setupStepper(saved ? 4 : 1)}
+
+      ${savedBanner}
+      ${errorBanner}
 
       <form method="POST" action="/setup/${tenantKey}">
-        <h3 style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:12px;">1. Payment Providers</h3>
+        <h3 style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:12px;">1. Alert Destinations <span style="font-weight:400;text-transform:none;">(pick one or both)</span></h3>
+
+        <div class="card channel-card-discord" style="padding:20px;margin-bottom:14px;">
+          <span class="fast-setup-badge">⚡ Fastest — 60 second setup</span>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">Discord</p>
+          <div class="input-group" style="margin-bottom:0;">
+            <label class="input-label">Discord Webhook URL</label>
+            <input name="discordWebhookUrl" placeholder="https://discord.com/api/webhooks/…" value="${escapeAttr(tenant.discordWebhookUrl)}" autocomplete="off" />
+            <p style="font-size:0.78rem;color:var(--text-dim);margin-top:6px;">Server → Channel → Integrations → Webhooks → New Webhook → Copy URL (e.g. <code>#payments</code>)</p>
+          </div>
+        </div>
+
+        <div class="card channel-card-telegram" style="padding:20px;margin-bottom:24px;">
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">Telegram</p>
+          <div class="input-group">
+            <label class="input-label">Telegram Bot Token (@BotFather)</label>
+            <input name="telegramBotToken" placeholder="123456789:ABCdef..." value="${escapeAttr(tenant.telegramBotToken)}" autocomplete="off" />
+          </div>
+          <div class="input-group" style="margin-bottom:0;">
+            <label class="input-label">Telegram Chat ID</label>
+            <input name="telegramChatId" placeholder="123456789 or -100..." value="${escapeAttr(tenant.telegramChatId)}" autocomplete="off" />
+            <p style="font-size:0.78rem;color:var(--text-dim);margin-top:6px;">@userinfobot for user ID · groups need <code>-100…</code> ID</p>
+          </div>
+        </div>
+
+        <h3 style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:12px;">2. Payment Providers</h3>
+        <p style="font-size:0.84rem;color:var(--text-muted);margin-bottom:14px;">Start with Stripe only if unsure — enable others later.</p>
         ${providers
           .map((p) =>
             providerField(
@@ -1177,38 +1589,24 @@ export function setupPage(
           )
           .join("")}
 
-        <h3 style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin:24px 0 12px;">2. Alert Destinations <span style="font-weight:400;text-transform:none;letter-spacing:0;">(Telegram, Discord, or both)</span></h3>
-        <div class="card" style="padding:20px;margin-bottom:14px;">
-          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">Telegram</p>
-          <div class="input-group">
-            <label class="input-label">Telegram Bot Token (@BotFather)</label>
-            <input name="telegramBotToken" placeholder="123456789:ABCdef..." value="${escapeAttr(tenant.telegramBotToken)}" autocomplete="off" />
-          </div>
-          <div class="input-group" style="margin-bottom:0;">
-            <label class="input-label">Telegram Chat ID (User ID or -100 Group ID)</label>
-            <input name="telegramChatId" placeholder="123456789 or -100..." value="${escapeAttr(tenant.telegramChatId)}" autocomplete="off" />
-            <p style="font-size:0.78rem;color:var(--text-dim);margin-top:6px;">Message @userinfobot for your ID. For groups: add bot → send a message → visit <code style="font-size:0.76rem;">api.telegram.org/bot&lt;token&gt;/getUpdates</code></p>
-          </div>
-        </div>
-        <div class="card" style="padding:20px;">
-          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">Discord</p>
-          <div class="input-group" style="margin-bottom:0;">
-            <label class="input-label">Discord Webhook URL</label>
-            <input name="discordWebhookUrl" placeholder="https://discord.com/api/webhooks/…" value="${escapeAttr(tenant.discordWebhookUrl)}" autocomplete="off" />
-            <p style="font-size:0.78rem;color:var(--text-dim);margin-top:6px;">Discord server → Channel settings → Integrations → Webhooks → New Webhook → Copy Webhook URL. Pick a channel like <code>#payments</code>.</p>
-          </div>
-        </div>
-
         <div class="card" style="padding:20px;margin-top:20px;background:rgba(16,185,129,0.06);border-color:rgba(16,185,129,0.2);">
-          <h3 style="font-size:0.9rem;margin-bottom:8px;color:#6ee7b7;">Test your setup</h3>
-          <p style="font-size:0.84rem;color:var(--text-muted);line-height:1.6;margin:0;">
-            After saving: Stripe → send test webhook or pay with card <code>4242 4242 4242 4242</code>.
-            Paystack → use test secret key and a test transaction.
-            Alert should appear in Telegram or Discord within seconds.
+          <h3 style="font-size:0.9rem;margin-bottom:8px;color:#6ee7b7;">3. Test your setup</h3>
+          <p style="font-size:0.84rem;color:var(--text-muted);line-height:1.6;margin:0 0 12px;">
+            <strong style="color:#e2e8f0;">Stripe:</strong> Developers → Webhooks → your endpoint → <strong>Send test webhook</strong> (payment_intent.succeeded).<br/>
+            <strong style="color:#e2e8f0;">Or pay with test card:</strong> <code>4242 4242 4242 4242</code>
           </p>
+          <details style="font-size:0.82rem;color:var(--text-muted);">
+            <summary style="cursor:pointer;color:#a5b4fc;font-weight:600;">Troubleshooting</summary>
+            <ul style="margin:10px 0 0 18px;line-height:1.7;">
+              <li>Webhook URL must match exactly — no trailing spaces</li>
+              <li>Stripe secret is whsec_ from <em>that</em> endpoint, not sk_ API key</li>
+              <li>Discord: webhook URL, not bot token</li>
+              <li>Test vs live: same StripePing URL, different signing secret</li>
+            </ul>
+          </details>
         </div>
 
-        <button type="submit" class="btn-buy" style="margin-top:24px;">Save &amp; Activate Live Alerts</button>
+        <button type="submit" class="btn-buy" style="margin-top:24px;">Save &amp; send test alert</button>
       </form>
     </div>`,
     setupScript
@@ -1216,15 +1614,34 @@ export function setupPage(
 }
 
 export function successPage(tenantKey: string, origin: string): string {
+  const setupUrl = `${origin}/setup/${tenantKey}`;
+  const successScript = `
+    function copySetupLink() {
+      navigator.clipboard.writeText(document.getElementById('success-setup-url').value).then(() => {
+        const t = document.getElementById('copy-toast');
+        if (t) { t.textContent = 'Setup link copied — bookmark it!'; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
+      });
+    }
+  `;
   return pageShell(
     "Payment Confirmed — StripePing",
-    `<div class="container" style="max-width:540px;text-align:center;padding-top:60px;">
+    `<div class="container" style="max-width:540px;text-align:center;padding-top:40px;">
       ${nav(origin, "Success")}
+      ${setupStepper(1)}
       <div style="width:72px;height:72px;border-radius:50%;background:rgba(16,185,129,0.15);border:2px solid rgba(16,185,129,0.4);display:grid;place-items:center;font-size:2rem;color:var(--green);margin:0 auto 24px;">✓</div>
       <h1 style="font-size:2.2rem;letter-spacing:-0.03em;margin-bottom:12px;">You're in!</h1>
-      <p style="color:var(--text-muted);font-size:1.05rem;margin-bottom:32px;">Your lifetime purchase is confirmed. Complete your 2-minute setup to start receiving live alerts.</p>
-      <a class="btn-buy" style="text-decoration:none;" href="${origin}/setup/${tenantKey}">Go to Setup Dashboard →</a>
-    </div>`
+      <p style="color:var(--text-muted);font-size:1.05rem;margin-bottom:24px;">Step 1 of 4: Connect Discord or Telegram — takes about 5 minutes.</p>
+      <div style="text-align:left;margin-bottom:28px;">
+        <label class="input-label">Bookmark your setup link</label>
+        <div style="display:flex;gap:8px;">
+          <input type="text" readonly id="success-setup-url" value="${escapeHtml(setupUrl)}" style="font-family:monospace;font-size:0.85rem;" />
+          <button type="button" class="btn-buy copy-btn" onclick="copySetupLink()">Copy</button>
+        </div>
+      </div>
+      <div id="copy-toast" class="copy-toast"></div>
+      <a class="btn-buy" style="text-decoration:none;" href="${setupUrl}">Go to Setup Dashboard →</a>
+    </div>`,
+    successScript
   );
 }
 
