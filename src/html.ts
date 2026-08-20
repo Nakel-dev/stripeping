@@ -474,6 +474,213 @@ function baseStyles(): string {
       color: var(--text-dim);
       font-size: 0.82rem;
     }
+
+    /* Section headings */
+    .section-head {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .section-head h2 {
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+    .section-head p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* Numbered steps (Webhookify-style) */
+    .steps {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .step-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.25), rgba(99,102,241,0.08));
+      border: 1px solid rgba(99,102,241,0.35);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #a5b4fc;
+    }
+    .step h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+    .step p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .step code {
+      display: block;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.45);
+      border: 1px solid var(--border);
+      font-family: ui-monospace, monospace;
+      font-size: 0.78rem;
+      color: #94a3b8;
+      word-break: break-all;
+    }
+
+    /* Events table */
+    .events-wrap {
+      overflow-x: auto;
+      margin-bottom: 48px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+    .events-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+    }
+    .events-table th,
+    .events-table td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .events-table th {
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: rgba(0,0,0,0.2);
+    }
+    .events-table td { color: #cbd5e1; }
+    .events-table tr:last-child td { border-bottom: none; }
+    .evt-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: ui-monospace, monospace;
+      font-size: 0.76rem;
+      background: rgba(99,102,241,0.12);
+      color: #a5b4fc;
+    }
+
+    /* Example notification block */
+    .example-notif {
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 48px;
+      font-family: ui-monospace, monospace;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: #94a3b8;
+      white-space: pre-wrap;
+    }
+    .example-notif .hl { color: #6ee7b7; }
+    .example-notif .dim { color: #64748b; }
+
+    /* Use cases */
+    .use-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 48px;
+    }
+    .use-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .use-card h4 {
+      font-size: 0.92rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .use-card p {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Setup guide sidebar hint */
+    .setup-steps {
+      background: rgba(99,102,241,0.08);
+      border: 1px solid rgba(99,102,241,0.2);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .setup-steps ol {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.8;
+    }
+    .setup-steps strong { color: #e2e8f0; }
+    .provider-events {
+      margin-top: 10px;
+      font-size: 0.76rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .provider-events span {
+      display: inline-block;
+      margin: 2px 4px 2px 0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.05);
+      font-family: ui-monospace, monospace;
+    }
+
+    /* Bottom CTA */
+    .cta-banner {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(99,102,241,0.1));
+      border: 1px solid rgba(16,185,129,0.25);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      margin-bottom: 48px;
+    }
+    .cta-banner h2 {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .cta-banner p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+    .cta-banner a {
+      display: inline-flex;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
   `;
 }
 
@@ -544,7 +751,7 @@ export function landingPage(origin: string): string {
   `;
 
   return pageShell(
-    "StripePing — Instant Payment Alerts in Telegram",
+    "StripePing — Payment Alerts on Telegram & Discord",
     `<div class="container">
       ${nav(origin, "Instant Alerts · $0 Server Cost")}
 
@@ -553,7 +760,7 @@ export function landingPage(origin: string): string {
           <span class="pill-badge">🔥 Multi-Provider: Stripe · Paystack · Flutterwave · Bachs</span>
         </div>
         <h1>Know the exact second<br/>you get paid.</h1>
-        <p>Get instant, beautiful Telegram notifications when money enters your business. Never refresh your payment dashboards again.</p>
+        <p>Human-readable payment alerts on Telegram or Discord — Stripe, Paystack, Flutterwave &amp; Bachs. Setup in under 10 minutes. No code, no servers.</p>
       </header>
 
       <!-- Live Notification Simulator -->
@@ -583,7 +790,63 @@ export function landingPage(origin: string): string {
         </div>
       </section>
 
-      <!-- Comparison Section (Pain vs Relief) -->
+      <!-- Why StripePing -->
+      <section class="grid-3">
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>Instant Payment Awareness</h3>
+          <p>Know the moment a customer pays, fails, or gets refunded. Alerts arrive in seconds — not hours later when you check your dashboard.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <h3>Telegram or Discord</h3>
+          <p>Send alerts to your phone via Telegram, your team via a Discord #payments channel — or both at once.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌍</div>
+          <h3>Stripe + Africa Gateways</h3>
+          <p>One Telegram chat for Stripe (USD/EUR), Paystack (NGN), Flutterwave, and Bachs — built for indie hackers worldwide and in Nigeria.</p>
+        </div>
+      </section>
+
+      <!-- How it works -->
+      <section>
+        <div class="section-head">
+          <h2>How It Works</h2>
+          <p>Four steps. Under 10 minutes. Same flow Webhookify users love — but $19 once, not monthly.</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div>
+              <h3>Buy lifetime access</h3>
+              <p>Pay $19 (~₦30,000) via Bachs. You get a private setup dashboard link instantly after payment.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div>
+              <h3>Copy your webhook URL</h3>
+              <p>Your dashboard generates a unique URL per provider. Paste it into Stripe, Paystack, or Flutterwave — one URL per gateway.</p>
+              <code>https://stripeping.pages.dev/webhook/paystack/your-key</code>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div>
+              <h3>Connect Telegram or Discord</h3>
+              <p>Telegram: bot from @BotFather + chat ID. Discord: create a webhook in Server Settings → Integrations → Webhooks.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div>
+              <h3>Send a test payment</h3>
+              <p>Use test mode (Stripe card 4242… or Paystack test keys). Your phone buzzes within seconds when money clears.</p>
+            </div>
+          </div>
+        </div>
+      </section>
       <section class="comparison-section">
         <h2 style="font-size:1.3rem;letter-spacing:-0.02em;text-align:center;">Why Indie Hackers Switch to StripePing</h2>
         <div class="comp-grid">
@@ -608,22 +871,97 @@ export function landingPage(origin: string): string {
         </div>
       </section>
 
-      <!-- Features Grid -->
+      <!-- Example notification (Webhookify-style) -->
+      <section>
+        <div class="section-head">
+          <h2>Example Alert</h2>
+          <p>This is what lands in your Telegram — not raw JSON.</p>
+        </div>
+        <div class="example-notif"><span class="hl">✅ Paystack payment received</span>
+
+Amount: <span class="hl">₦45,000.00</span>
+Customer: samuel@startup.ng
+Ref: <span class="dim">pstk_live_8912739</span>
+
+<span class="dim">── Stripe example ──</span>
+
+<span class="hl">✅ Stripe payment succeeded</span>
+
+Amount: <span class="hl">$49.99 USD</span>
+Customer: john@example.com
+Payment ID: <span class="dim">pi_3NkXy2ABC123</span></div>
+      </section>
+
+      <!-- Events you can monitor -->
+      <section>
+        <div class="section-head">
+          <h2>Events You Can Monitor</h2>
+          <p>StripePing filters noise — only payment-critical events become alerts.</p>
+        </div>
+        <div class="events-wrap">
+          <table class="events-table">
+            <thead>
+              <tr><th>Provider</th><th>Event</th><th>What you get</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Stripe</td><td><span class="evt-badge">payment_intent.succeeded</span></td><td>Customer paid successfully</td></tr>
+              <tr><td>Stripe</td><td><span class="evt-badge">payment_intent.payment_failed</span></td><td>Card declined or payment failed</td></tr>
+              <tr><td>Stripe</td><td><span class="evt-badge">charge.refunded</span></td><td>Refund issued</td></tr>
+              <tr><td>Stripe</td><td><span class="evt-badge">invoice.payment_failed</span></td><td>Subscription renewal failed</td></tr>
+              <tr><td>Stripe</td><td><span class="evt-badge">customer.subscription.deleted</span></td><td>Customer canceled subscription</td></tr>
+              <tr><td>Paystack</td><td><span class="evt-badge">charge.success</span></td><td>Payment received</td></tr>
+              <tr><td>Paystack</td><td><span class="evt-badge">charge.failed</span></td><td>Payment failed</td></tr>
+              <tr><td>Paystack</td><td><span class="evt-badge">refund.processed</span></td><td>Refund completed</td></tr>
+              <tr><td>Flutterwave</td><td><span class="evt-badge">charge.completed</span></td><td>Payment received</td></tr>
+              <tr><td>Flutterwave</td><td><span class="evt-badge">charge.failed</span></td><td>Payment failed</td></tr>
+              <tr><td>Bachs</td><td><span class="evt-badge">collection.succeeded</span></td><td>Payment collected</td></tr>
+              <tr><td>Bachs</td><td><span class="evt-badge">collection.failed</span></td><td>Collection failed</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Use cases -->
+      <section>
+        <div class="section-head">
+          <h2>Real-World Use Cases</h2>
+        </div>
+        <div class="use-grid">
+          <div class="use-card">
+            <h4>💰 SaaS Revenue Tracking</h4>
+            <p>Scroll your Telegram at end of day — every subscription, renewal, and churn without opening Stripe.</p>
+          </div>
+          <div class="use-card">
+            <h4>🇳🇬 Paystack in Nigeria</h4>
+            <p>Get NGN payment pings the second bank transfer or card clears — perfect for local SaaS and agencies.</p>
+          </div>
+          <div class="use-card">
+            <h4>⚠️ Failed Payment Recovery</h4>
+            <p>Instant alert when a card fails. Reach out before the customer churns or the subscription lapses.</p>
+          </div>
+          <div class="use-card">
+            <h4>🚀 Launch Day</h4>
+            <p>Product Hunt or Reddit post live? Watch payments roll in on your phone instead of refreshing dashboards.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Security note -->
       <section class="grid-3">
         <div class="card">
-          <div class="card-icon">⚡</div>
-          <h3>10-Minute Setup</h3>
-          <p>No code needed. Simply copy your generated webhook URLs and paste them into your Stripe or Paystack dashboards.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">🌍</div>
-          <h3>Built for Global &amp; Africa</h3>
-          <p>Full native support for Nigerian Naira (NGN), USD, EUR, GHS, KES across Stripe, Paystack, Flutterwave, and Bachs.</p>
-        </div>
-        <div class="card">
           <div class="card-icon">🔒</div>
-          <h3>HMAC Secure &amp; Private</h3>
-          <p>Every webhook is cryptographically verified (HMAC-SHA256/SHA512). Your payment data never gets stored unencrypted.</p>
+          <h3>HMAC Verified</h3>
+          <p>Every webhook is cryptographically signed and verified before any alert is sent. Invalid payloads are rejected.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">☁️</div>
+          <h3>Zero Infrastructure</h3>
+          <p>Runs on Cloudflare Edge. No servers to maintain, no Docker, no database bills — ever.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💵</div>
+          <h3>$19 Lifetime</h3>
+          <p>Unlike Webhookify's monthly plans, pay once. Unlimited alerts. All four providers included.</p>
         </div>
       </section>
 
@@ -673,7 +1011,33 @@ export function landingPage(origin: string): string {
             <div class="faq-q">How long does setup take after payment?</div>
             <div class="faq-a">Under 10 minutes. You get immediate access to your setup dashboard right after payment.</div>
           </div>
+          <div class="faq-item">
+            <div class="faq-q">Do you support Discord or WhatsApp?</div>
+            <div class="faq-a">Discord and Telegram are both supported — use one or both. WhatsApp requires Meta Business API approval and is not planned for v1.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Can I send alerts to both Telegram and Discord?</div>
+            <div class="faq-a">Yes. Paste both on the setup page and every payment alert goes to both channels simultaneously.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Can I track multiple SaaS products separately?</div>
+            <div class="faq-a">One purchase = one Telegram destination. If your SaaS use different providers (e.g. SaaS A on Paystack, SaaS B on Stripe), both can feed the same chat. Two Stripe accounts need two purchases — for now.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Webhook not arriving / no Telegram alert?</div>
+            <div class="faq-a">Double-check the webhook URL matches exactly (no trailing spaces). Confirm your bot token and chat ID. Send a test payment in test mode. Make sure you saved config on the setup page.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Test mode vs live mode?</div>
+            <div class="faq-a">Stripe and Paystack have separate test/live keys. Use test keys + test payments first. Your webhook URL stays the same — only the secret key changes.</div>
+          </div>
         </div>
+      </section>
+
+      <section class="cta-banner">
+        <h2>Never Miss a Payment Again</h2>
+        <p>Set up in under 10 minutes. $19 once — not monthly.</p>
+        <a href="#buy">Get Lifetime Access →</a>
       </section>
 
       <footer class="footer">
@@ -700,10 +1064,22 @@ function providerField(
     bachs: "Webhook signing secret",
   };
   const hints: Record<PaymentProvider, string> = {
-    stripe: "Stripe Dashboard → Developers → Webhooks → Signing secret",
-    paystack: "Paystack secret key (Settings → API Keys)",
-    flutterwave: "Flutterwave → Settings → API → Secret hash",
-    bachs: "Bachs Developer Portal → Webhooks",
+    stripe: "Stripe Dashboard → Developers → Webhooks → Add endpoint → paste URL above → copy Signing secret",
+    paystack: "Paystack → Settings → API Keys & Webhooks → paste URL → use Secret Key below",
+    flutterwave: "Flutterwave → Settings → Webhooks → paste URL → copy Secret hash",
+    bachs: "Bachs Developer Portal → Webhooks → Add destination → paste URL",
+  };
+  const setupSteps: Record<PaymentProvider, string> = {
+    stripe: "Developers → Webhooks → Add endpoint → paste your URL → select payment_intent.*, charge.refunded, invoice.payment_failed, customer.subscription.deleted",
+    paystack: "Settings → API Keys & Webhooks → Add webhook URL → enable charge.success and charge.failed",
+    flutterwave: "Settings → Webhooks → Add webhook → paste URL → enable charge.completed",
+    bachs: "Developer Portal → Webhooks → Add destination → paste URL → enable collection.succeeded",
+  };
+  const monitoredEvents: Record<PaymentProvider, string[]> = {
+    stripe: ["payment_intent.succeeded", "payment_intent.payment_failed", "charge.refunded", "invoice.payment_failed", "customer.subscription.deleted"],
+    paystack: ["charge.success", "charge.failed", "refund.processed", "transfer.success"],
+    flutterwave: ["charge.completed", "charge.failed", "transfer.completed"],
+    bachs: ["collection.succeeded", "collection.failed"],
   };
   const fieldNames: Record<PaymentProvider, string> = {
     stripe: "stripeSecret",
@@ -729,6 +1105,10 @@ function providerField(
         <label class="input-label">${PROVIDER_LABELS[provider]} Webhook / Secret Key</label>
         <input name="${fieldNames[provider]}" value="${escapeAttr(value)}" placeholder="${placeholders[provider]}" autocomplete="off" />
         <p style="font-size:0.78rem;color:var(--text-dim);margin-top:6px;">${hints[provider]}</p>
+        <p style="font-size:0.78rem;color:var(--text-muted);margin-top:8px;"><strong style="color:#cbd5e1;">Setup:</strong> ${setupSteps[provider]}</p>
+        <div class="provider-events">
+          Alerts for: ${monitoredEvents[provider].map((e) => `<span>${e}</span>`).join("")}
+        </div>
       </div>
     </div>`;
 }
@@ -768,7 +1148,17 @@ export function setupPage(
     `<div class="container" style="max-width:680px;">
       ${nav(origin, "Setup Portal")}
       <h1 style="font-size:1.8rem;letter-spacing:-0.03em;margin-bottom:8px;">Configure Your Webhooks</h1>
-      <p style="color:var(--text-muted);margin-bottom:24px;">Enable the gateways you use, copy the webhook URLs into your dashboard, and connect your Telegram bot.</p>
+      <p style="color:var(--text-muted);margin-bottom:20px;">Enable your gateways, paste webhook URLs, connect Telegram and/or Discord. Takes about 10 minutes.</p>
+
+      <div class="setup-steps">
+        <ol>
+          <li><strong>Enable</strong> each payment provider you use below</li>
+          <li><strong>Copy</strong> the webhook URL → paste in Stripe / Paystack / Flutterwave dashboard</li>
+          <li><strong>Paste</strong> your secret key so StripePing can verify incoming webhooks</li>
+          <li><strong>Connect Telegram and/or Discord</strong> — at least one required</li>
+          <li><strong>Save</strong> → send a test payment → check your channel</li>
+        </ol>
+      </div>
 
       ${saved ? '<div style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);color:#6ee7b7;padding:14px;border-radius:10px;margin-bottom:20px;">✓ Configuration saved! Trigger a test payment to receive an alert.</div>' : ""}
       ${error ? `<div style="background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.3);color:#fca5a5;padding:14px;border-radius:10px;margin-bottom:20px;">${escapeHtml(error)}</div>` : ""}
@@ -787,17 +1177,35 @@ export function setupPage(
           )
           .join("")}
 
-        <h3 style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin:24px 0 12px;">2. Telegram Destination</h3>
-        <div class="card" style="padding:20px;">
+        <h3 style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin:24px 0 12px;">2. Alert Destinations <span style="font-weight:400;text-transform:none;letter-spacing:0;">(Telegram, Discord, or both)</span></h3>
+        <div class="card" style="padding:20px;margin-bottom:14px;">
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">Telegram</p>
           <div class="input-group">
             <label class="input-label">Telegram Bot Token (@BotFather)</label>
-            <input name="telegramBotToken" required placeholder="123456789:ABCdef..." value="${escapeAttr(tenant.telegramBotToken)}" autocomplete="off" />
+            <input name="telegramBotToken" placeholder="123456789:ABCdef..." value="${escapeAttr(tenant.telegramBotToken)}" autocomplete="off" />
           </div>
           <div class="input-group" style="margin-bottom:0;">
             <label class="input-label">Telegram Chat ID (User ID or -100 Group ID)</label>
-            <input name="telegramChatId" required placeholder="123456789 or -100..." value="${escapeAttr(tenant.telegramChatId)}" autocomplete="off" />
-            <p style="font-size:0.78rem;color:var(--text-dim);margin-top:6px;">Message @userinfobot to get your ID, or invite your bot to a channel/group.</p>
+            <input name="telegramChatId" placeholder="123456789 or -100..." value="${escapeAttr(tenant.telegramChatId)}" autocomplete="off" />
+            <p style="font-size:0.78rem;color:var(--text-dim);margin-top:6px;">Message @userinfobot for your ID. For groups: add bot → send a message → visit <code style="font-size:0.76rem;">api.telegram.org/bot&lt;token&gt;/getUpdates</code></p>
           </div>
+        </div>
+        <div class="card" style="padding:20px;">
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">Discord</p>
+          <div class="input-group" style="margin-bottom:0;">
+            <label class="input-label">Discord Webhook URL</label>
+            <input name="discordWebhookUrl" placeholder="https://discord.com/api/webhooks/…" value="${escapeAttr(tenant.discordWebhookUrl)}" autocomplete="off" />
+            <p style="font-size:0.78rem;color:var(--text-dim);margin-top:6px;">Discord server → Channel settings → Integrations → Webhooks → New Webhook → Copy Webhook URL. Pick a channel like <code>#payments</code>.</p>
+          </div>
+        </div>
+
+        <div class="card" style="padding:20px;margin-top:20px;background:rgba(16,185,129,0.06);border-color:rgba(16,185,129,0.2);">
+          <h3 style="font-size:0.9rem;margin-bottom:8px;color:#6ee7b7;">Test your setup</h3>
+          <p style="font-size:0.84rem;color:var(--text-muted);line-height:1.6;margin:0;">
+            After saving: Stripe → send test webhook or pay with card <code>4242 4242 4242 4242</code>.
+            Paystack → use test secret key and a test transaction.
+            Alert should appear in Telegram or Discord within seconds.
+          </p>
         </div>
 
         <button type="submit" class="btn-buy" style="margin-top:24px;">Save &amp; Activate Live Alerts</button>

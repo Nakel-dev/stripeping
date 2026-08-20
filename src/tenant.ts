@@ -13,6 +13,7 @@ export interface TenantConfig {
   secrets: TenantSecrets;
   telegramBotToken: string;
   telegramChatId: string;
+  discordWebhookUrl: string;
   createdAt: string;
   paid: boolean;
 }
@@ -30,7 +31,10 @@ function normalizeTenant(raw: unknown): TenantConfig | null {
   if (!raw || typeof raw !== "object") return null;
   const t = raw as LegacyTenantConfig & Partial<TenantConfig>;
   if (t.secrets && Array.isArray(t.enabledProviders)) {
-    return t as TenantConfig;
+    return {
+      ...(t as TenantConfig),
+      discordWebhookUrl: (t as TenantConfig).discordWebhookUrl ?? "",
+    };
   }
   const stripe = t.stripeWebhookSecret?.trim();
   return {
@@ -39,6 +43,7 @@ function normalizeTenant(raw: unknown): TenantConfig | null {
     secrets: stripe ? { stripe } : {},
     telegramBotToken: t.telegramBotToken ?? "",
     telegramChatId: t.telegramChatId ?? "",
+    discordWebhookUrl: "",
     createdAt: t.createdAt ?? new Date().toISOString(),
     paid: Boolean(t.paid),
   };
@@ -146,6 +151,7 @@ export function emptyTenant(email: string): TenantConfig {
     secrets: {},
     telegramBotToken: "",
     telegramChatId: "",
+    discordWebhookUrl: "",
     createdAt: new Date().toISOString(),
     paid: true,
   };

@@ -97,7 +97,7 @@ export default {
       }
 
       if (request.method === "GET" && url.pathname === "/health") {
-        return json({ ok: true, service: "stripeping", version: "0.3.0" });
+        return json({ ok: true, service: "stripeping", version: "0.4.0" });
       }
 
       return new Response("Not Found", { status: 404 });
@@ -288,6 +288,7 @@ async function saveSetup(
   const bachs = String(form.get("bachsSecret") ?? "").trim();
   const telegramBotToken = String(form.get("telegramBotToken") ?? "").trim();
   const telegramChatId = String(form.get("telegramChatId") ?? "").trim();
+  const discordWebhookUrl = String(form.get("discordWebhookUrl") ?? "").trim();
 
   if (enabledProviders.length === 0) {
     return html(
@@ -344,15 +345,47 @@ async function saveSetup(
     delete secrets.bachs;
   }
 
-  if (!telegramBotToken.includes(":")) {
+  const hasTelegram =
+    Boolean(telegramBotToken) || Boolean(telegramChatId);
+  const hasDiscord = Boolean(discordWebhookUrl);
+
+  if (!hasTelegram && !hasDiscord) {
     return html(
-      setupPage(key, origin, tenant, false, "Telegram bot token looks invalid."),
+      setupPage(
+        key,
+        origin,
+        tenant,
+        false,
+        "Connect at least one alert destination: Telegram or Discord."
+      ),
       400
     );
   }
-  if (!telegramChatId) {
+
+  if (hasTelegram) {
+    if (!telegramBotToken.includes(":")) {
+      return html(
+        setupPage(key, origin, tenant, false, "Telegram bot token looks invalid."),
+        400
+      );
+    }
+    if (!telegramChatId) {
+      return html(
+        setupPage(key, origin, tenant, false, "Telegram chat ID is required when using Telegram."),
+        400
+      );
+    }
+  }
+
+  if (hasDiscord && !isDiscordWebhookUrl(discordWebhookUrl)) {
     return html(
-      setupPage(key, origin, tenant, false, "Telegram chat ID is required."),
+      setupPage(
+        key,
+        origin,
+        tenant,
+        false,
+        "Discord webhook URL must look like https://discord.com/api/webhooks/…"
+      ),
       400
     );
   }
@@ -361,8 +394,9 @@ async function saveSetup(
     ...tenant,
     enabledProviders,
     secrets,
-    telegramBotToken,
-    telegramChatId,
+    telegramBotToken: hasTelegram ? telegramBotToken : "",
+    telegramChatId: hasTelegram ? telegramChatId : "",
+    discordWebhookUrl: hasDiscord ? discordWebhookUrl : "",
   };
 
   await saveTenant(env.TENANTS, key, updated);
@@ -438,10 +472,62 @@ async function handleTenantWebhook(
   }
 
   if (message) {
-    await sendTelegram(tenant.telegramBotToken, tenant.telegramChatId, message);
+    await deliverAlert(tenant, message);
   }
 
   return json({ received: true });
+}
+
+async function deliverAlert(tenant: TenantConfig, message: string): Promise<void> {
+  const tasks: Promise<void>[] = [];
+
+  if (tenant.telegramBotToken && tenant.telegramChatId) {
+    tasks.push(sendTelegram(tenant.telegramBotToken, tenant.telegramChatId, message));
+  }
+
+  if (tenant.discordWebhookUrl) {
+    tasks.push(sendDiscord(tenant.discordWebhookUrl, message));
+  }
+
+  const results = await Promise.allSettled(tasks);
+  for (const result of results) {
+    if (result.status === "rejected") console.error("Alert delivery failed:", result.reason);
+  }
+}
+
+function isDiscordWebhookUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return (
+      (parsed.hostname === "discord.com" ||
+        parsed.hostname === "discordapp.com") &&
+      parsed.pathname.startsWith("/api/webhooks/") &&
+      parsed.pathname.split("/").filter(Boolean).length >= 3
+    );
+  } catch {
+    return false;
+  }
+}
+
+function htmlToDiscord(text: string): string {
+  return text
+    .replace(/<b>(.*?)<\/b>/gi, "**$1**")
+    .replace(/<code>(.*?)<\/code>/gi, "`$1`")
+    .replace(/<\/?[^>]+>/g, "")
+    .slice(0, 2000);
+}
+
+async function sendDiscord(webhookUrl: string, htmlMessage: string): Promise<void> {
+  const content = htmlToDiscord(htmlMessage);
+  const response = await fetch(webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content }),
+  });
+  if (!response.ok) {
+    const detail = await response.text();
+    throw new Error(`Discord failed: ${response.status} ${detail}`);
+  }
 }
 
 async function sendTelegram(
